@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.tag{
+background-color:#5BC0DE;
+border: 2px solid #46B8DA;
+border-radius:4px;
+
+}
+.tag a i{
+padding-top:3px;
+	
+	
+}

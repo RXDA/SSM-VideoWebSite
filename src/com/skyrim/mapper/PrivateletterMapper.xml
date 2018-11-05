@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyrim.mapper.PrivateletterMapper" >
+  <resultMap id="BaseResultMap" type="com.skyrim.po.Privateletter" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="senderuid" property="senderuid" jdbcType="INTEGER" />
+    <result column="receiveruid" property="receiveruid" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="isread" property="isread" jdbcType="BIT" />
+    <result column="senddate" property="senddate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, senderuid, receiveruid, message, isread, senddate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.skyrim.po.PrivateletterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from privateletter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from privateletter
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from privateletter
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.skyrim.po.PrivateletterExample" >
+    delete from privateletter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.skyrim.po.Privateletter" >
+    insert into privateletter (pid, senderuid, receiveruid, 
+      message, isread, senddate)
+    values (#{pid,jdbcType=INTEGER}, #{senderuid,jdbcType=INTEGER}, #{receiveruid,jdbcType=INTEGER}, 
+      #{message,jdbcType=VARCHAR}, #{isread,jdbcType=BIT}, #{senddate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.skyrim.po.Privateletter" >
+    insert into privateletter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="senderuid != null" >
+        senderuid,
+      </if>
+      <if test="receiveruid != null" >
+        receiveruid,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="isread != null" >
+        isread,
+      </if>
+      <if test="senddate != null" >
+        senddate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="senderuid != null" >
+        #{senderuid,jdbcType=INTEGER},
+      </if>
+      <if test="receiveruid != null" >
+        #{receiveruid,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=BIT},
+      </if>
+      <if test="senddate != null" >
+        #{senddate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.skyrim.po.PrivateletterExample" resultType="java.lang.Integer" >
+    select count(*) from privateletter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update privateletter
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.senderuid != null" >
+        senderuid = #{record.senderuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveruid != null" >
+        receiveruid = #{record.receiveruid,jdbcType=INTEGER},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isread != null" >
+        isread = #{record.isread,jdbcType=BIT},
+      </if>
+      <if test="record.senddate != null" >
+        senddate = #{record.senddate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update privateletter
+    set pid = #{record.pid,jdbcType=INTEGER},
+      senderuid = #{record.senderuid,jdbcType=INTEGER},
+      receiveruid = #{record.receiveruid,jdbcType=INTEGER},
+      message = #{record.message,jdbcType=VARCHAR},
+      isread = #{record.isread,jdbcType=BIT},
+      senddate = #{record.senddate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.skyrim.po.Privateletter" >
+    update privateletter
+    <set >
+      <if test="senderuid != null" >
+        senderuid = #{senderuid,jdbcType=INTEGER},
+      </if>
+      <if test="receiveruid != null" >
+        receiveruid = #{receiveruid,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="isread != null" >
+        isread = #{isread,jdbcType=BIT},
+      </if>
+      <if test="senddate != null" >
+        senddate = #{senddate,jdbcType=DATE},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.skyrim.po.Privateletter" >
+    update privateletter
+    set senderuid = #{senderuid,jdbcType=INTEGER},
+      receiveruid = #{receiveruid,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      isread = #{isread,jdbcType=BIT},
+      senddate = #{senddate,jdbcType=DATE}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

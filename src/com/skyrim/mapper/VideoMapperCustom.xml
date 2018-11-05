@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.skyrim.mapper.VideoMapperCustom" >
+<select id="topVideoWithType" parameterType="hashmap" 
+			resultType="com.skyrim.po.Video">
+	   select * from video where vtype like '%${type}%' order by video.vplaytime DESC limit ${limit}
+	</select>
+	
+<select id="LastVideoWithType" parameterType="hashmap" 
+			resultType="com.skyrim.po.Video">
+	   select * from video where vtype like '%${type}%' order by video.vdate DESC limit ${limit}
+	</select>
+
+  
+</mapper>

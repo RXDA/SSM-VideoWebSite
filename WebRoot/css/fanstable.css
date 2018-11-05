@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+
+
+
+.td1{
+	width:120px;
+	height: 20px;
+}
+.td2{
+	width:100px;
+	
+}
+
+.table tbody tr td p{
+	margin-top:5px;
+	font-size: 18px;
+	
+	
+}
+.table tbody tr td a{
+	margin-top:5px;
+	width:100px;
+	text-decoration:none;
+
+	
+	
+}
+.table tbody tr td a img{
+	width:40px;
+	height:40px;
+	
+	
+	
+}
